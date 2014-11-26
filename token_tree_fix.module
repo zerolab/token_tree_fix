@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Helper module to force all Drupal contrib modules to use the Token dialog,
+ * rather than display the whole tree when rendering a Token-enabled element.
+ */
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function token_tree_fix_theme_registry_alter(&$theme_registry) {
+  $theme_registry['token_tree']['function'] = 'token_tree_fix_token_tree';
+}
+
+/**
+ * Stub token_tree theme callback to enable the token dialog
+ * for all contrib modules.
+ *
+ * @see http://drupal.org/node/1684984
+ */
+function token_tree_fix_token_tree(&$variables) {
+  if (arg(0) != 'token' || arg(1) != 'tree') {
+    $variables['dialog'] = TRUE;
+  }
+
+  return theme_token_tree($variables);
+}

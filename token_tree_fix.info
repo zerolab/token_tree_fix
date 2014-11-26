@@ -1,0 +1,4 @@
+name = Token tree fix
+description = Force all contrib modules to use the Token Dialog
+core = 7.x
+dependencies[] = token
